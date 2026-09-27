@@ -5,18 +5,19 @@ PyTorch (torch, torchvision)
 
 ## Layihə strukturu
 
+```
 mnist_project/
-├── data/ # MNIST datasetı (avtomatik endirilir)
-├── custom_digits/ # 5 real əl yazısı rəqəm şəkli
-├── models.py # MLP və CNN arxitekturaları
-├── train.py # Data pipeline, training, evaluation, qrafiklər
-├── inference.py # Saxlanmış modelin yenidən yüklənməsi + custom test
-├── best_cnn.pth # Öyrədilmiş CNN ağırlıqları
-├── training_curves.png # Loss/Accuracy qrafiki
-├── confusion_matrix.png # Confusion matrix
-├── custom_digit_predictions.png # Custom test nəticələri
+├── data/                         # MNIST datasetı (avtomatik endirilir)
+├── custom_digits/                # 5 real əl yazısı rəqəm şəkli
+├── models.py                     # MLP və CNN arxitekturaları
+├── train.py                      # Data pipeline, training, evaluation, qrafiklər
+├── inference.py                  # Saxlanmış modelin yenidən yüklənməsi + custom test
+├── best_cnn.pth                  # Öyrədilmiş CNN ağırlıqları
+├── training_curves.png           # Loss/Accuracy qrafiki
+├── confusion_matrix.png          # Confusion matrix
+├── custom_digit_predictions.png  # Custom test nəticələri
 └── README.md
-
+```
 
 ## Data Pipeline
 - MNIST `torchvision.datasets.MNIST` ilə yükləndi (standart loader, əlavə pipeline gizlədilmədi)
@@ -55,11 +56,14 @@ CNN, MLP-ni ~1.3-1.4% fərqlə keçdi. MNIST miqyasında bu, 10,000 test şəkli
 
 Həmçinin qeyd: MLP-nin val loss-u epoch 5-dən sonra dalğalanmağa (artıb-azalmağa) başladı (`0.0906 → 0.1029 → 0.1326`), bu overfitting əlamətidir. CNN-də bu dalğalanma daha azdır və ümumi trend daha sabitdir.
 
-Training curves qrafiki: `training_curves.png`
+### Training Curves
+![Training Curves](training_curves.png)
 
 ## Confusion Matrix
 
-Test set üzərində CNN üçün hesablanıb (`confusion_matrix.png`).
+Test set üzərində CNN üçün hesablanıb.
+
+![Confusion Matrix](confusion_matrix.png)
 
 **Ən çox qarışan cüt: Əsl rəqəm = 2, Proqnoz = 7** (12 dəfə səhv edilib)
 
@@ -78,6 +82,8 @@ Test set üzərində CNN üçün hesablanıb (`confusion_matrix.png`).
 6. 28×28-ə kiçildilmə (`INTER_AREA` interpolyasiya ilə)
 7. Xətlərin `dilate` ilə qalınlaşdırılması (nazik qələm xəttini MNIST-in qalın rəqəmlərinə yaxınlaşdırmaq üçün)
 8. Eyni normallaşdırma (`mean=0.1307, std=0.3081`)
+
+![Custom Digit Predictions](custom_digit_predictions.png)
 
 **Nəticələr:**
 
